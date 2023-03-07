@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 import pandas as pd
+from pages.models import Item, ToDoList
 # import pickle
 # import sklearn # You must perform a pip install.
 # import pandas as pd
