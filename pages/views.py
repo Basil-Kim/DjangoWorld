@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 import pandas as pd
-from pages.models import Item, ToDoList
+from .models import Item, ToDoList
 # import pickle
 # import sklearn # You must perform a pip install.
 # import pandas as pd
@@ -72,3 +72,40 @@ def results(request, choice, gmat):
     return render(request, 'results.html', {'choice': workExperience, 'gmat':gmat,
                 'prediction':"n/a at the moment"})
 
+def todos(request):
+    print("*** Inside todos()")
+    items = Item.objects
+    itemErrandDetail = items.select_related('todolist')
+    print(itemErrandDetail[0].todolist.name)
+    return render(request, 'ToDoItems.html',
+                {'ToDoItemDetail': itemErrandDetail})
+
+
+from django.shortcuts import render, redirect
+from .forms import RegisterForm
+
+def register(response):
+    # Handle POST request.
+    if response.method == "POST":
+        form = RegisterForm(response.POST)
+        if form.is_valid():
+            form.save()
+
+            return HttpResponseRedirect(reverse('message',
+                                                kwargs={'msg': "Your are registered.", 'title': "Success!"}, ))
+
+    # Handle GET request.
+    else:
+        form = RegisterForm()
+    return render(response, "registration/register.html", {"form":form})
+
+
+def message(request, msg, title):
+    return render(request, 'message.html', {'msg': msg, 'title': title })
+
+def secretArea(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('message',
+               kwargs={'msg': "Please login to access this page.",
+                       'title': "Login required."}, ))
+    return render(request, 'secret.html', {'useremail': request.user.email })
