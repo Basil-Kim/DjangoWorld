@@ -1,18 +1,809 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<!-- base.html -->
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <style type="text/css">
+    body {
+        box-sizing: border-box;
+        width: 100vw;
+        height: 100vh;
+        overflow-x: hidden;
+        background-color: #ffffbf;
+        background-image: linear-gradient(25deg, #fdfd96 20%, #ffffbf 74%);
+        background-size: 100% 3000%;
+
+    }
+    label {
+  display: block; /* Set display to block so label takes full width of container */
+margin: 0;
+}
+
+input, select {
+  display: block; /* Set display to block so input takes full width of container */
+  margin: 0;
+  border-radius: 0.2rem;
+align-items: center;
+
+}
+
+input {
+    width: auto;
+}
+
+select {
+    width: auto;
+}
+
+#post_button {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  margin-top:2rem;
+  width: 100%;
+}
+
+/*.flex-container {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*  align-items:center;*/
+/*  flex-direction: column;*/
+/*}*/
+
+label {
+    font-size: 1.5rem;
+}
+
+input {
+    text-align: center;
+    flex-basis: 2.5rem;
+    flex-shrink: 0;
+    margin-left: 10px;
+
+}
+
+
+
+
+
+
+
+        .topnav {
+            max-height:15%;
+            min-height: 5%;
+
+            width:100%;
+            position: fixed;
+            z-index:1;
+            top:0;
+            left:0;
+
+            background: url(https://slidescorner.com/wp-content/uploads/2022/09/03-Bob-Green-Grass-Soccer-Field-Background-by-SlidesCorner-768x432.jpg);
+
+            padding-top:20px;
+            display: flex; /* Added */
+            justify-content: center; /* Added */
+
+        }
+
+                .topnav a {
+            padding:6px 8px 6px 16px;
+            align-items: center;
+            text-decoration: none;
+            font-size:25px;
+            color: #f1f1f1;
+            display:inline;
+        }
+
+                .topnav a:hover{
+            color:#818181;
+            text-decoration: none;
+        }
+
+
+
+          .main{
+            margin-left:auto;
+            padding: 0px 10px;
+            margin-top: 150px;
+            vertical-align: top;
+
+        }
+        #introduction {
+            margin-top: 30px;
+        }
+        #team1, #team2 {
+            display: inline-block;
+            width: 45%;
+
+        }
+
+        #team1 {
+            margin-right: 5%;
+        }
+        #team-container {
+            display:flex;
+
+            justify-content: center;
+            align-items:center;
+            margin-left:25%;
+        }
+
+
+
+
+        .container {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .team {
+            flex-basis: 40%;
+        text-align: center;
+}
+
+.winner {
+    display: flex;
+    flex-direction: column;
+              align-items: center;
+              margin-top: 10%;
+
+
+}
+
+.team:first-child {
+  margin-right: 5%;
+}
+
+.team:last-child {
+  margin-left: 5%;
+}
+
+
+.soccer {
+    margin-left: 38%;
+  background: url(http://upload.wikimedia.org/wikipedia/en/e/ec/Soccer_ball.svg);
+  background-size: 50px 50px;
+  height: 50px;
+  width: 50px;
+  position: relative;
+  -webkit-animation:roll 4.5s 1;
+  -moz-animation:roll 4.5s 1;
+  animation:roll 4.5s 1;
+}
+
+@-moz-keyframes roll {
+  0% {left:0px; -webkit-transform: rotate(-360deg);}
+  50% {left:1000px; -webkit-transform: rotate(360deg);}
+  100% {left:0px; -webkit-transform: rotate(-360deg);}
+}
+@-webkit-keyframes roll {
+  0% {left:0px; -webkit-transform: rotate(-360deg);}
+  50% {left:1000px; -webkit-transform: rotate(360deg);}
+  100% {left:0px; -webkit-transform: rotate(-360deg);}
+}
+
+@keyframes roll {
+  0% {left:0px; -webkit-transform: rotate(-360deg);}
+  50% {left:1000px; -webkit-transform: rotate(360deg);}
+  100% {left:0px; -webkit-transform: rotate(-360deg);}
+}
+
+.world-cup {
+  color: #82AE6F;
+  text-align: center;
+}
+
+.flag {
+    border: 2px solid black;
+    border-radius: 2.5rem;
+    width: 40%;
+}
+
+.footer {
+    height: 1%;
+}
+
+  h1 span {
+  display: inline-block;
+}
+
+
+
+/*Table Styles*/
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    font-weight: bold;
+    color: #009879;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+
+#lookup {
+    margin: auto auto;
+}
+
+#title {
+margin: 25px auto;
+width: 100%;
+text-align:center;
+}
+/*------------*/
+
+/*Confetti Styles*/
+#confetti-wrapper {
+  overflow: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.confetti {
+  width: 10px;
+  height: 10px;
+  background-color: #f2d74e;
+  position: absolute;
+  left: 50%;
+  animation: confetti 5s ease-in-out -2s infinite;
+  transform-origin: left top;
+}
+
+.confetti:nth-child(1) {
+  background-color: #FCF6B0;
+  left: 10%;
+  animation-delay: 0;
+}
+
+.confetti:nth-child(2) {
+  background-color: #78531E;
+  left: 20%;
+  animation-delay: -5s;
+}
+
+.confetti:nth-child(3) {
+  background-color: #E3C47A;
+  left: 30%;
+  animation-delay: -3s;
+}
+
+.confetti:nth-child(4) {
+  background-color: #896C41;
+  left: 40%;
+  animation-delay: -2.5s;
+}
+
+.confetti:nth-child(5) {
+  background-color: #9A5F22;
+
+  left: 50%;
+  animation-delay: -4s;
+}
+
+.confetti:nth-child(6) {
+  background-color: #DDC571;
+  left: 60%;
+  animation-delay: -6s;
+}
+
+.confetti:nth-child(7) {
+  background-color: #8A5E25;
+  left: 70%;
+  animation-delay: -1.5s;
+}
+
+.confetti:nth-child(8) {
+  background-color: #FCDF73;
+  left: 80%;
+  animation-delay: -2s;
+}
+
+.confetti:nth-child(9) {
+  background-color: #4F3A20;
+  left: 90%;
+  animation-delay: -3.5s;
+}
+
+.confetti:nth-child(10) {
+  background-color: #F0E9A0;
+  left: 100%;
+  animation-delay: -2.5s;
+}
+
+.confetti:nth-child(11) {
+  background-color: #F0E9A3;
+  left: 72%;
+  animation-delay: -5.5s;
+}
+
+.confetti:nth-child(12) {
+  background-color: #F0E4A0;
+  left: 34%;
+  animation-delay: -2.8s;
+}
+
+.confetti:nth-child(13) {
+  background-color: #F0C9A0;
+  left: 100%;
+  animation-delay: -7.5s;
+}
+
+.confetti:nth-child(14) {
+  background-color: #F0B9A0;
+  left: 16%;
+  animation-delay: -8.5s;
+}
+
+
+@keyframes confetti {
+  0% {
+    transform: rotateZ(15deg) rotateY(0deg) translate(0, 0);
+  }
+  25% {
+    transform: rotateZ(5deg) rotateY(360deg) translate(-5vw, 20vh);
+  }
+  50% {
+    transform: rotateZ(15deg) rotateY(720deg) translate(5vw, 60vh);
+  }
+  75% {
+    transform: rotateZ(5deg) rotateY(1080deg) translate(-10vw, 80vh);
+  }
+  100% {
+    transform: rotateZ(15deg) rotateY(1440deg) translate(10vw, 110vh);
+  }
+}
+
+/*---------------*/
+.line {
+margin-left: 25%;
+width: 55%;
+}
+
+/* Block quote styling*/
+/* center the blockquote in the page */
+.blockquote-wrapper {
+   display: flex;
+   height: 10%;
+   padding: 0 20px;
+   padding-bottom: 10rem;
+   z-index: 0;
+}
+
+/* Blockquote main style */
+.blockquote {
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    color: #000000;
+    padding: 30px 0;
+    width: 100%;
+    max-width: 500px;
+    z-index: 0;
+    margin: 80px auto;
+    align-self: center;
+    border-top: solid 1px;
+    border-bottom: solid 1px;
+}
+
+/* Blockquote header */
+.blockquote h1 {
+    position: relative;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0;
+}
+
+/* Blockquote right double quotes */
+.blockquote:after {
+    position: absolute;
+    content: "”";
+    color: #000000;
+    font-size: 5rem;
+    line-height: 0;
+    bottom: -43px;
+    right: 30px;
+}
+
+/* increase header size after 600px */
+@media all and (min-width: 600px) {
+    .blockquote h1 {
+        font-size: 40px;
+   }
+
+
+}
+
+/* Blockquote subheader */
+.blockquote h4 {
+    position: relative;
+    color: #000000;
+    font-size: 1.4rem;
+    font-weight: normal;
+    line-height: 1;
+    margin: 0;
+    padding-top: 20px;
+    z-index: 0;
+}
+/*--------------------*/
+
+
+
+@media screen and (max-width: 500px) {
+    body{
+        overflow-x: hidden;
+    }
+
+/*#team-container {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*}*/
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team {
+    width: 10%;
+    height: auto;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .team img {
+    width: 100%;
+    height: auto;
+  }
+
+
+
+  .container {
+    flex-direction: column;
+  }
+
+
+
+  .styled-table {
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 200px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.blockquote-wrapper {
+   display: flex;
+   height: 10%;
+   padding: 0 20px;
+   z-index: 0;
+   margin: 5px auto auto 45px;
+}
+
+
+
+/* Blockquote style */
+.blockquote {
+
+    font-weight: 800;
+
+    padding: 20px 1px;
+    width: 100%;
+
+    margin: 20px auto;
+    align-self: center;
+    border-top: solid 1px;
+    border-bottom: solid 1px;
+
+
+}
+
+/* Blockquote header */
+.blockquote h1 {
+    position: relative;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0;
+}
+
+/* Blockquote right double quotes */
+.blockquote:after {
+    position: absolute;
+    content: "”";
+    color: #000000;
+    font-size: 3rem;
+    line-height: 0;
+    bottom: 10px;
+    right: 15px;
+}
+
+/* increase header size after 600px */
+@media all and (min-width: 600px) {
+    .blockquote h1 {
+        font-size: 30px;
+   }
+
+
+
+
+  #pie-chart {
+      width: 12rem;
+    }
+    div[id^="pie-container"] { /* select all divs whose id starts with "pie-container" */
+      padding-bottom: 3.75rem;
+      padding-top: 1.5rem;
+    }
+    div[id^="pie-container"] > div:last-child {
+      margin-left: 2rem;
+    }
+    div[id^="pie-container"] span {
+      font-size: 1.125rem;
+    }
+  }
+
+  @media screen and (min-width: 1024px) { /* adjust for desktop screens */
+    #pie-chart {
+      width: 16rem;
+    }
+    div[id^="pie-container"] {
+      padding-bottom: 5rem;
+      padding-top: 2rem;
+    }
+    div[id^="pie-container"] > div:last-child {
+      margin-left: 3rem;
+    }
+    div[id^="pie-container"] span {
+      font-size: 1.25rem;
+    }
+  }
+
+}
+
+/* Blockquote subheader */
+.blockquote h4 {
+    position: relative;
+    color: #000000;
+    font-size: 1.4rem;
+    font-weight: normal;
+    line-height: 1;
+    margin: 0;
+    padding-top: 20px;
+    z-index: 0;
+
+}
+
+
+
+
+}
+
+
+
+.data-content {
+    margin-top: 10%;
+}
+
+
+.lookup, .lookup:visited, .lookup:hover, .lookup:active {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: relative;
+  transition: 0.5s color ease;
+  text-decoration: none;
+  color: #81b3d2;
+  font-size: 1.5em;
+}
+
+.lookup:hover {
+  color: #009879;
+}
+
+.lookup.before:before, .lookup.after:after {
+  content: "";
+  transition: 0.5s all ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+}
+
+.lookup.before:before {
+  top: -0.25em;
+}
+
+.lookup.after:after {
+  bottom: -0.25em;
+}
+
+.lookup.before:before,
+.lookup.after:after {
+  height: 5px;
+  height: 0.35rem;
+  width: 0;
+  background: #d73444;
+}
+
+
+
+.lookup.before:hover:before,
+.lookup.after:hover:after {
+  width: 100%;
+}
+
+
+
+
+
+@media all and (min-width:100px) and (max-width: 500px) {
+#team-container {
+    width: 100%;
+
+    padding-left: 0;
+    padding-right: 40%;
+}
+
+#team1 {
+    margin-right: 40%;
+
+}
+
+#team2 {
+    margin-right: 30%;
+}
+
+input {
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+    padding-bottom: 0.5rem;
+}
+select {
+    width: 100px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+/*#team-container {*/
+/*    margin-right: 50%;*/
+/*    display: flex;*/
+
+/*}*/
+
+/*#team2 {*/
+/*    margin-top: 100px;*/
+/*}*/
+
+
+
+
+  label {
+        font-size: 1rem;
+
+    }
+
+
+
+
+
+    .blockquote-wrapper {
+   display: flex;
+   height: 4%;
+   padding-bottom: 5rem;
+   padding-top:0;
+   z-index: 0;
+   margin: 0 0;
+}
+ div[id^="pie-container"] {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 3.75rem;
+    padding-top: 1.5rem;
+  }
+
+  #pie-chart {
+    width: 10px;
+    height: 120px;
+    margin-bottom: 1.5rem;
+  }
+
+  div[id^="pie-container"] > div:last-child {
+    margin-left: 0;
+  }
+
+    .soccer {
+    margin-left: 48%;
+  background: url(http://upload.wikimedia.org/wikipedia/en/e/ec/Soccer_ball.svg);
+  background-size: 25px 25px;
+  height: 25px;
+  width: 25px;
+  position: relative;
+  -webkit-animation:roll 4.5s 1;
+  -moz-animation:roll 4.5s 1;
+  animation:roll 4.5s 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+    </style>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <title>{% block title %}Goal!{% endblock %}</title>
 </head>
+
 <body>
 
-<!-- templates/base.html -->
-<a href="{% url 'home' %}">Home</a> |
-<a href="{% url 'about' %}">About</a> |
-<a href="{% url 'basil' %}">Basil</a>
+    <div class="topnav">
+        <div class="nav-contents">
+        <a href="{% url 'home' %}">Goal!</a>
+        <a href="{% url 'about' %}">Data</a>
+         <div class="soccer"></div>
+         </div>
+    </div>
 
-{% block content %} {% endblock content %}
 
 
+    <div id="content" name="content" class="main">
+        <div class="row justify-content-center">
+
+            <div class="col-8">
+
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <div class='footer'><p></p></div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

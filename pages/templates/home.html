@@ -2,28 +2,75 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Home page</h1>
 
-  <h3>First Name: {{firstName}}</h3>
-  <h3>Last Name: {{lastName}}</h3>
+
 
 <form action="{% url 'homePost' %}" method="post">
 {% csrf_token %}
-<h3>Years Work Experience</h3>
+<div id="title">
+<h1>Goal! <span>Match Predictor</span></h1>
+<a class="lookup" href="{% url 'lookUpTable' %}"  target="_blank">Click for table of input values</a>
+<hr class="line">
+</div>
 
-<!-- Show radio button list named 'choice' -->
-{% for choice in mynumbers %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice }}">
-    <label for="choice{{ forloop.counter }}">{{ choice }}</label><br>
+<div id="team-container">
+
+<div id="team1">
+<label for="choice">Team 1</label>
+<select name="choice" id="choice" class="choices">
+{% for option in teams %}
+<option value="{{ option }}" {% if option == 'Argentina' %} selected {% endif %}>{{ option }}</option>
 {% endfor %}
+</select><br><br>
 
-  <h3>GMAT Score</h3>
-<input type="text" id="gmat" name="gmat"><br><br>
+<label for="f_rank1">Overall Rank</label>
+<input type="number" id="f_rank1" name="f_rank1" min="1" max="100" step="1" value="{{4}}">
 
-<!—Submit button is also contained in the form -->
-<input type="submit" value="POST YOUR CHOICE">
+<label for="gk1">Goal-keeper</label>
+<input type="number" id="gk1" name="gk_score1" min="0" max="100" step="1" value="{{84}}">
+
+<label for="def1">Defensive Rating</label>
+<input type="number" id="def1" name="def_score1" min="0" max="100" step="1" value="{{82}}">
+
+<label for="off1">Offensive Rating</label>
+<input type="number" id="off1" name="off_score1" min="0" max="100" step="1" value="{{89}}">
+
+<label for="mid1">Midfield Rating</label>
+<input type="number" id="mid1" name="mid_score1" min="0" max="100" step="1" value="{{84}}">
+
+</div>
+
+
+<div id="team2">
+    <label for="choice2">Team 2</label>
+    <select name="choice2" class="choices">
+        {% for option in teams %}
+            <option value="{{ option }}" {% if option == 'France' %} selected {% endif %}>{{ option }}</option>
+        {% endfor %}
+    </select><br><br>
+
+
+    <label for="f_rank2">Overall Rank</label>
+    <input type="number" id="f_rank2" name="f_rank2" min="1" max="100" step="1" value="{{3}}">
+<label for="gk2">Goal-keeper</label>
+<input type="number" id="gk2" name="gk_score2" min="0" max="100" step="1" value="{{87}}">
+
+<label for="def2">Defensive Rating</label>
+<input type="number" id="def2" name="def_score2" min="0" max="100" step="1" value="{{84}}">
+
+<label for="off2">Offensive Rating</label>
+<input type="number" id="off2" name="off_score2" min="0" max="100" step="1" value="{{87}}">
+
+<label for="mid2">Midfield Rating</label>
+<input type="number" id="mid2" name="mid_score2" min="0" max="100" step="1" value="{{86}}">
+</div>
+</div>
+
+<div id="post_button" >
+  <input style=" width:200px; background-color: #009879; color: #f3f3f3;" type="submit" value="KICK OFF">
+</div>
+
 </form>
-<!-- End of form. -->
 
 <!-- This error will notify the user if there are issues with the POST request -->
 {% if errorMessage %}<p><strong>{{errorMessage}}</strong></p>{% endif %}

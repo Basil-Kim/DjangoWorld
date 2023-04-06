@@ -2,9 +2,52 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Results page</h1>
-  You entered the following information:<br/>
-  Years work exerience: {{choice}}<br/>
-  GMAT Score: {{gmat}}
-  Prediction: {{prediction}}
+
+  <div class="winner">
+       <h4 style="margin-bottom: 2rem; margin-top: 0%">Predicted Winner with a {{probability}}% chance </h4>
+  {% if prediction == 'DRAW' %}
+    <div>DRAW</div>
+ {% else %}
+
+
+  <div id="confetti-wrapper">
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+      <div class="confetti"></div>
+    </div>
+
+ {% if prediction == 'Wales' %}
+
+    <img  class='flag' src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Flag_of_Wales.svg/500px-Flag_of_Wales.svg.png" alt="Flag of {{choice}}">
+{% elif prediction == 'Tunisia' %}
+<img  class='flag' src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Tunisia.svg/500px-Flag_of_Tunisia.svg.png" alt="Flag of {{choice}}">
+
+{% elif prediction == 'Serbia' %}
+<img  class='flag' src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_Serbia_%282004%E2%80%932010%29.svg/500px-Flag_of_Serbia_%282004%E2%80%932010%29.svg.png" alt="Flag of {{choice}}">
+
+
+
+ {% else %}
+<img class='flag' src="https://www.worldometers.info/img/flags/{{winner}}-flag.gif" alt="Flag of {{choice}}">
+{% endif %}
+{% endif %}
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+  <hr/>
+<h2>{{prediction}}</h2>
+
+</div>
+</div>
+
+
 {% endblock content %}

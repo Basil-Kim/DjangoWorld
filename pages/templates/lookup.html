@@ -1,0 +1,28 @@
+   {% extends "base.html" %}
+
+{% block content %}
+   <table class="styled-table" id="lookup">
+    <thead>
+        <tr>
+            <th>Country</th>
+            <th>FIFA Rank</th>
+            <th>Goal-Keeper Score</th>
+            <th>Defense Score</th>
+            <th>Offense Score</th>
+            <th>Midfield Rk</th>
+        </tr>
+    </thead>
+    <tbody>
+       {% for row in rows %}
+        <tr>
+            <td>{{ row.0 }}</td>
+            <td>{{ row.1 }}</td>
+            <td>{{ row.2 }}</td>
+            <td>{{ row.3 }}</td>
+            <td>{{ row.4 }}</td>
+            <td>{{ row.5 }}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

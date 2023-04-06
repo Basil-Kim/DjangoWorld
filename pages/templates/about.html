@@ -1,16 +1,165 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 <!-- templates/about.html -->
 {% extends "base.html" %}
 
 {% block content %}
-<h1>About page</h1>
-{% endblock content %}
 
-</body>
-</html>
+    <div class="blockquote-wrapper">
+  <div class="blockquote">
+    <h1>Everything is practice</h1>
+    <h4>&mdash; Pele </h4>
+  </div>
+</div>
+<div class='data-content'>
+
+
+  <section id="introduction">
+    <h2>Introduction</h2>
+    <p>Every four years, the world gathers to watch the "beautiful game".
+    Part of the appeal of the event lies in the difficulty of predicting final results based on data alone.
+    Many intangible factors contribute to a team's success and, as displayed in the most recent World Cup, there are often upsets characterized by a less dominant team winning over a clear favourite.
+    Therein the challenge was to train a model, using the match data from 1993 to 2022, to predict the final result in a match-up between any two teams that participated in the 2022 World Cup in Qatar with a measure of acceptabel accuracy.
+    The consensus is that typically predictive sports models have an accuracy between 30% to 60%. The problem is exacerbated by the fact that in soccer there are typically three final results; win, lose, and draw.
+    </p>
+  </section>
+
+  <section id="data-exploration">
+    <h2>Data Exploration</h2>
+    <p>This model was built using the international_matches.csv dataset <a href="https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017">here</a>.</p>
+    <p>First the target variable needed to be defined and this was done by taking "home_team_score" and "away_team_score" to create a categorical target variable called "result" which has three initial categories; "Win", "Lose", "Draw".
+    The chart below shows the portional slices of values for the target variable.</p>
+
+<div id="pie-container" style="display: flex; padding-bottom: 2.5rem; padding-top: 1rem;">
+  <div id="pie-chart" style="
+      border-radius: 100%;
+      width: 8rem; /* changed to rem */
+      aspect-ratio: 1;
+      background: conic-gradient(#982d00 0deg 51%, #009879 51% 74.4%, #006b98 74.4% 100%);"
+
+      ></div>
+  <div style="display: flex; flex-direction: column; justify-content: center; margin-left: 1.25rem;"> <!-- changed to rem -->
+    <div style="display: flex; align-items: center; margin-bottom: 0.3125rem;"> <!-- changed to rem -->
+      <div style="width: 1.25rem; height: 1.25rem; background-color: #982d00; margin-right: 0.625rem;"></div> <!-- changed to rem -->
+      <span>Home Team Wins (51%)</span>
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 0.3125rem;"> <!-- changed to rem -->
+      <div style="width: 1.25rem; height: 1.25rem; background-color: #009879; margin-right: 0.625rem;"></div> <!-- changed to rem -->
+      <span>Away Team Wins (26%)</span>
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 0.3125rem;"> <!-- changed to rem -->
+      <div style="width: 1.25rem; height: 1.25rem; background-color: #006b98; margin-right: 0.625rem;"></div> <!-- changed to rem -->
+      <span>Draws (23%)</span>
+    </div>
+
+  </div>
+</div>
+
+
+    <p>The features selected were FIFA scores for positional features which were the most highly correlated to the target, "result". However, before proceeding the dataset needed to be treated for missing entries.
+    The dataset is missing entries for years before 2004. Rather than cut the dataset, the average for the scores were substituted. For teams that did not have many recorded FIFA games, the average scores were set at 50. </p>
+    <p>The selected features and their respective correlation scores are displayed in the following table:</p>
+    <table class="styled-table">
+    <thead>
+        <tr>
+            <th>Features</th>
+            <th>Correlation Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Team 1 FIFA Rank</td>
+            <td>-0.19</td>
+        </tr>
+
+        <tr >
+            <td>Team 2 FIFA Rank </td>
+            <td>0.11</td>
+        </tr>
+        <tr>
+            <td>Team 1 Goal Keeper</td>
+            <td>0.12</td>
+        </tr>
+        <tr>
+            <td>Team 2 Goal Keeper</td>
+            <td>-0.12</td>
+        </tr>
+        <tr>
+            <td>Team 1 Defense</td>
+            <td>0.16</td>
+        </tr>
+        <tr>
+            <td>Team 2 Defense</td>
+            <td>-0.12</td>
+        </tr>
+        <tr>
+            <td>Team 1 Offense</td>
+            <td>0.17</td>
+        </tr>
+         <tr>
+            <td>Team 2 Offense</td>
+            <td>-0.12</td>
+        </tr>
+        <tr>
+            <td>Team 1 Midfield</td>
+            <td>0.16</td>
+        </tr>
+        <tr>
+            <td>Team 2 Midfield</td>
+            <td>-0.13</td>
+        </tr>
+
+    </tbody>
+</table>
+  </section>
+
+
+
+  <section id="model-tuning">
+    <h2>Model Tuning</h2>
+    <p>There were initially two models trained and tested: a stacked model and a hyper-tuned artifical neural network.
+    The stacked model used the Random Forest, Multi-nomial Logistic Regression, and Ada Boost Classifiers as base models for its features.
+    All the models were cross-validated across 5 folds and grid-searched for the best parameters to use.
+    However, upon deployment the models were discovered to place heavy weights for 'Team1' and 'Team2' features.
+    This was due to the fact that the dataset includes entries for all competitions, even friendlies.
+    Therefore, the data was re-processed, models re-trained, and a new model, the XGB-Boost Classifier with grid-searched parameters, is discovered to be the most robust
+    in making predictions on inputs that differ from the data the model was trained on.
+    Below is a summary of the models and their performance scores:
+
+     </p>
+     <table class="styled-table">
+    <thead>
+        <tr>
+            <th>Model</th>
+            <th>Accuracy</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Artifical Neural Network</td>
+            <td>0.51</td>
+        </tr>
+        <tr>
+            <td>XGB Boost</td>
+            <td>0.62</td>
+        </tr>
+        <tr>
+            <td>Stacked Model</td>
+            <td>0.60</td>
+        </tr>
+        <!-- and so on... -->
+    </tbody>
+</table>
+  </section>
+
+  <section id="final-observations">
+    <h2>Final Observations</h2>
+    <p>In conclusion, the XGB Boost model performs relatively well with an accuracy of 62%. Although this is a relatively high accuracy compared to many other models, the difficulty of predicting three different results for a soccer match, leads to overall poor performance in accurately predicting the result of a match.</p>
+    <p>Furthermore, the model is only trained using the FIFA rankings. More feature engineering could potentially provide a better predictive model. Features such as player stats and roster choices could lead to better results.</p>
+
+    <p>Finally, it is recommended that this model be soley used for analytical purposes and not for profit.</p>
+
+  </section>
+
+<p>Now lets predict a match!</p>
+  <button style="margin-left: 2.5rem; border-radius:0.2rem; background-color: #009879; color: #f3f3f3;"><a href="{% url 'home' %}" style="color: #f3f3f3; text-decoration: none;">Predict a Match</a></button>
+  </div>
+{% endblock content %}
